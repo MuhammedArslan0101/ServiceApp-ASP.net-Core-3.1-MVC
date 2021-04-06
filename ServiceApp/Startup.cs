@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceApp.DataAccess.Data;
+using ServiceApp.DataAccess.Data.Repository.IRepository;
+using ServiceApp.DataAccess.Data.Repository;
 
 namespace ServiceApp
 {
@@ -30,10 +32,14 @@ namespace ServiceApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddIdentity<IdentityUser ,IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders(); // To use new feature like forgotpassword vs ...
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // Newtonsofjson To use API
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

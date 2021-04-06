@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServiceApp.DataAccess.Data.Repository.IRepository
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         // Yonet all of transication in database
         ICategoryRepository Category { get; }

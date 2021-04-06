@@ -5,11 +5,11 @@ using System.Text;
 
 namespace ServiceApp.DataAccess.Data.Repository
 {
-    class UnıtOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
 
-        public UnıtOfWork(ApplicationDbContext db)
+        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
