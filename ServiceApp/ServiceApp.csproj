@@ -20,4 +20,8 @@
     <Folder Include="Areas\Admin\Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceApp.DataAccess\ServiceApp.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
